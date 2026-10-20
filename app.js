@@ -84,13 +84,11 @@ async function submit(){
 function qrPage(){
  const base=location.origin+location.pathname.replace(/[^/]*$/,"");
  const client=base+"#client",collab=base+"#collaborateur";
+ const q=(url)=>"https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=12&data="+encodeURIComponent(url);
  wrap(`<section class="card"><div class="topbar"><button class="back" onclick="home()">← Accueil</button></div><h2>QR codes</h2><p class="sub" style="text-align:left">À imprimer ou afficher pour accéder directement au bon questionnaire.</p>
- <div class="qr-grid"><div class="qr-card"><h3>Client</h3><canvas id="qrc"></canvas><div class="copyrow"><input value="${client}" readonly><button class="btn secondary" onclick="navigator.clipboard.writeText('${client}').then(()=>toast('Lien copié'))">Copier</button></div><button class="btn gold" style="margin-top:10px" onclick="downloadQR('qrc','QR-Matters-Chicken-Client.png')">Télécharger le QR</button></div>
- <div class="qr-card"><h3>Collaborateurs</h3><canvas id="qrk"></canvas><div class="copyrow"><input value="${collab}" readonly><button class="btn secondary" onclick="navigator.clipboard.writeText('${collab}').then(()=>toast('Lien copié'))">Copier</button></div><button class="btn gold" style="margin-top:10px" onclick="downloadQR('qrk','QR-Matters-Chicken-Collaborateurs.png')">Télécharger le QR</button></div></div></section>`);
- QRCode.toCanvas(document.getElementById("qrc"),client,{width:240,margin:2});
- QRCode.toCanvas(document.getElementById("qrk"),collab,{width:240,margin:2});
+ <div class="qr-grid"><div class="qr-card"><h3>Client</h3><img id="qrc" src="${q(client)}" alt="QR code questionnaire client"><div class="copyrow"><input value="${client}" readonly><button class="btn secondary" onclick="navigator.clipboard.writeText('${client}').then(()=>toast('Lien copié'))">Copier</button></div><a class="btn gold qr-download" href="${q(client)}" target="_blank" rel="noopener">Ouvrir le QR</a></div>
+ <div class="qr-card"><h3>Collaborateurs</h3><img id="qrk" src="${q(collab)}" alt="QR code questionnaire collaborateurs"><div class="copyrow"><input value="${collab}" readonly><button class="btn secondary" onclick="navigator.clipboard.writeText('${collab}').then(()=>toast('Lien copié'))">Copier</button></div><a class="btn gold qr-download" href="${q(collab)}" target="_blank" rel="noopener">Ouvrir le QR</a></div></div></section>`);
 }
-function downloadQR(id,name){const a=document.createElement("a");a.download=name;a.href=document.getElementById(id).toDataURL("image/png");a.click()}
 function resultsLogin(){
  wrap(`<section class="card"><div class="topbar"><button class="back" onclick="home()">← Accueil</button></div><h2>Résultats</h2><p class="sub" style="text-align:left">Accès réservé à l'équipe projet.</p><input id="code" type="password" placeholder="Code d'accès" style="width:100%;padding:14px;border:1px solid var(--line);border-radius:14px;margin-top:16px"><button class="btn primary" style="width:100%;margin-top:10px" onclick="loadResults()">Afficher les résultats</button></section>`)
 }
