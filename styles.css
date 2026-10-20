@@ -56,7 +56,7 @@ textarea:focus{outline:2px solid rgba(63,91,66,.18);border-color:var(--green)}
 .success .check{font-size:54px;margin-bottom:8px}
 .qr-grid{display:grid;gap:16px;margin-top:18px}
 .qr-card{text-align:center}
-.qr-card canvas{max-width:220px;width:100%;height:auto;border-radius:12px;background:white;padding:10px}
+.qr-card img{max-width:220px;width:100%;height:auto;border-radius:12px;background:white;padding:10px}.qr-download{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;margin-top:10px}
 .copyrow{display:flex;gap:8px;margin-top:10px}
 .copyrow input{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}
 .admin-link{text-align:center;margin-top:20px;font-size:.82rem}
